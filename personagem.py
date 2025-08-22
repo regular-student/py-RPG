@@ -57,7 +57,7 @@ class Personagem:
                 while True:
                     escolha = int(input(
                     f"O dado rolou\t->\t{dado}\n"
-                    "Quer colocar o valor em qual atributo?"))
+                    "Quer colocar o valor em qual atributo?\t-> "))
                 
                     #checagem e adição
                     if escolha in escolhido:
@@ -66,4 +66,40 @@ class Personagem:
                         self.atributos[nomes_atributos[escolha - 1]] = dado
                         escolhido.append(escolha)
                         break
+
+        elif estilo == "3":
+            print(f"Os atributos são\n"
+                    "1\t-\tForça\n"
+                    "2\t-\tDestreza\n"
+                    "3\t-\tConstituição\n"
+                    "4\t-\tInteligência\n"
+                    "5\t-\tSabedoria\n"
+                    "6\t-\tCarisma\n...")
+            nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"]
+            escolhido = []
+            for atributo in range(6):
+                dado = 0
+                numeros = []
+                for _ in range(4):
+                    num = random.randint(1,6)
+                    numeros.append(num)
+
+                valor = min(numeros)
+                min.remove(valor)
+
+                for numero in numeros:
+                    dado += numero
+
+                while True:
+                    escolha = int(input(
+                        f"O dado rolou\t->\t{dado}\n"
+                        "Quer colocar o valor em qual atributo?\t-> "))
                     
+                    #checagem e adição
+                    if escolha in escolhido:
+                        print("Você não pode repetir o mesmo atributo!")
+                    else:
+                        self.atributos[nomes_atributos[escolha - 1]] = dado
+                        escolhido.append(escolha)
+                        break
+
