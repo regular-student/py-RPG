@@ -1,0 +1,69 @@
+import random
+
+# Os atributos são determinados de acordo com o índice da lista
+# 0 = Força
+# 1 = Destreza
+# 2 = Constituição
+# 3 = Inteligência
+# 4 = Sabedoria
+# 5 = Carisma
+
+class Personagem:
+    def __init__(self):
+        self.atributos = {
+            "forca": 0,
+            "destreza": 0,
+            "constituicao": 0,
+            "inteligencia": 0,
+            "sabedoria": 0,
+            "carisma": 0
+        }
+
+    def __str__(self):
+        return (
+                f"\t\t--> Atributos <--\t\t\n"
+                f"FOR:\t{self.atributos['forca']}\n"
+                f"DES:\t{self.atributos['destreza']}\n"
+                f"CON:\t{self.atributos['constituicao']}\n"
+                f"INT:\t{self.atributos['inteligencia']}\n"
+                f"SAB:\t{self.atributos['sabedoria']}\n"
+                f"CAR:\t{self.atributos['carisma']}"
+            )
+
+# Como a decisão de estilos aparentemente afeta somente a criação de personagens, então decidi colocar os métodos relacionados a isso aqui mesmo. 
+    def determinar_atributos(self, estilo):
+        if estilo == "1":
+            for atributo in range(6):
+                dado = 0
+                for _ in range(3):
+                    dado += random.randint(1, 6)
+                self.atributos.append(dado)
+
+        elif estilo == "2":
+            print(f"Os atributos são\n"
+                "1\t-\tForça\n"
+                "2\t-\tDestreza\n"
+                "3\t-\tConstituição\n"
+                "4\t-\tInteligência\n"
+                "5\t-\tSabedoria\n"
+                "6\t-\tCarisma\n...")
+            nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"]
+            escolhido = []
+            for atributo in range(6):
+                dado = 0
+                for _ in range(3):
+                    dado += random.randint(1, 6)
+
+                while True:
+                    escolha = int(input(
+                    f"O dado rolou\t->\t{dado}\n"
+                    "Quer colocar o valor em qual atributo?"))
+                
+                    #checagem e adição
+                    if escolha in escolhido:
+                        print("Você não pode repetir o mesmo atributo!")
+                    else:
+                        self.atributos[nomes_atributos[escolha - 1]] = dado
+                        escolhido.append(escolha)
+                        break
+                    
