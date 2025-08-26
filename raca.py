@@ -12,6 +12,7 @@ class Raca(ABC):
 class Humano(Raca):
     def bonus(self):
         return {
+            "nome": "Humano",
             "mobilidade": 9,
             "infravisão": "no",
             "alinhamento": "all"
@@ -20,6 +21,7 @@ class Humano(Raca):
 class Elfo(Raca):
     def bonus(self):
         return {
+            "nome": "Elfo",
             "mobilidade": 9,
             "infravisão": 18,
             "alinhamento": "neutral"
@@ -28,6 +30,7 @@ class Elfo(Raca):
 class Halfling(Raca):
     def bonus(self):
         return {
+            "nome": "Halfling",
             "mobilidade": 6,
             "infravisão": "no",
             "alinhamento": "neutral"

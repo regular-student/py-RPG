@@ -22,6 +22,8 @@ class Personagem:
         }
         self.raca = raca()
         self.determinar_atributos(estilo)
+        bonus_raciais = self.raca.bonus()
+        self.atributos.update(bonus_raciais)
 
     def __str__(self):
         base = (
@@ -31,19 +33,21 @@ class Personagem:
             f"CON:\t{self.atributos['constituicao']}\n"
             f"INT:\t{self.atributos['inteligencia']}\n"
             f"SAB:\t{self.atributos['sabedoria']}\n"
-            f"CAR:\t{self.atributos['carisma']}\n"
+            f"CAR:\t{self.atributos['carisma']}\n\n"
+            f"\t\t--> {self.atributos['nome']} <--\t\t\n"
+            f"MOB:\t{self.atributos['mobilidade']}\n"
+            f"INF:\t{self.atributos['infravisão']}\n"
+            f"ALIGN:\t{self.atributos['alinhamento']}\n"
         )
 
-        raciais = self.raca.bonus()
-        raciais_str = "\n".join([f"{k.upper()}:\t{v}" for k, v in raciais.items()])
-
-        return f"{base}\n\t\t--> Atributos Raciais <--\t\t\n{raciais_str}"
-
+        return base
     
 # Como a decisão de estilos aparentemente afeta somente a criação de personagens, então decidi colocar os métodos relacionados a isso aqui mesmo. 
     def determinar_atributos(self, estilo):
+        nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"]
+
         if estilo == "1":
-            for atributo in range(6):
+            for atributo in nomes_atributos:
                 dado = 0
                 for _ in range(3):
                     dado += random.randint(1, 6)
@@ -57,9 +61,8 @@ class Personagem:
                 "4\t-\tInteligência\n"
                 "5\t-\tSabedoria\n"
                 "6\t-\tCarisma\n...")
-            nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"]
             escolhido = []
-            for atributo in range(6):
+            for atributo in nomes_atributos:
                 dado = 0
                 for _ in range(3):
                     dado += random.randint(1, 6)
@@ -85,9 +88,8 @@ class Personagem:
                     "4\t-\tInteligência\n"
                     "5\t-\tSabedoria\n"
                     "6\t-\tCarisma\n...")
-            nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"]
             escolhido = []
-            for atributo in range(6):
+            for atributo in nomes_atributos:
                 dado = 0
                 numeros = []
                 for _ in range(4):
