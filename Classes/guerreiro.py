@@ -4,8 +4,8 @@ class Guerreiro(ClasseBase):
     def __init__(self):
         super().__init__("Guerreiro", 10, 1)
 
-        self.armas = ["Todas"]
-        self.armaduras = ["Todas"]
+        self.armas = ["all"]
+        self.armaduras = ["all"]
         self.itens_magicos = ["Pergaminho de protecao"]
         self.habilidades = {
             "Maestria em arma": 1,

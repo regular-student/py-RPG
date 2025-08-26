@@ -1,5 +1,8 @@
 import random
 from raca import Humano, Elfo, Halfling
+from Classes.guerreiro import Guerreiro
+from Classes.mago import Mago
+from Classes.clerigo import Clerigo
 
 # Os atributos são determinados de acordo com o índice da lista
 # 0 = Força
@@ -10,7 +13,7 @@ from raca import Humano, Elfo, Halfling
 # 5 = Carisma
 
 class Personagem:
-    def __init__(self, raca, estilo):
+    def __init__(self, raca, classe, estilo):
         self.atributos = {
             "forca": 0,
             "destreza": 0,
@@ -21,6 +24,7 @@ class Personagem:
             "XP": 0
         }
         self.raca = raca()
+        self.classe = classe()
         self.determinar_atributos(estilo)
         bonus_raciais = self.raca.bonus()
         self.atributos.update(bonus_raciais)
@@ -37,7 +41,10 @@ class Personagem:
             f"\t\t--> {self.atributos['nome']} <--\t\t\n"
             f"MOB:\t{self.atributos['mobilidade']}\n"
             f"INF:\t{self.atributos['infravisão']}\n"
-            f"ALIGN:\t{self.atributos['alinhamento']}\n"
+            f"ALIGN:\t{self.atributos['alinhamento']}\n\n"
+            f"\t\t--> {self.classe.nome} <--\t\t\n"
+            f"VIDA:\t{self.classe.vida_base}\n"
+            f"ATAQUE:\t{self.classe.ataque_base}\n"
         )
 
         return base
