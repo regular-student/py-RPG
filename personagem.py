@@ -1,4 +1,5 @@
 import random
+from raca import Humano, Elfo, Halfling
 
 # Os atributos são determinados de acordo com o índice da lista
 # 0 = Força
@@ -9,27 +10,36 @@ import random
 # 5 = Carisma
 
 class Personagem:
-    def __init__(self):
+    def __init__(self, raca, estilo):
         self.atributos = {
             "forca": 0,
             "destreza": 0,
             "constituicao": 0,
             "inteligencia": 0,
             "sabedoria": 0,
-            "carisma": 0
+            "carisma": 0,
+            "XP": 0
         }
+        self.raca = raca()
+        self.determinar_atributos(estilo)
 
     def __str__(self):
-        return (
-                f"\t\t--> Atributos <--\t\t\n"
-                f"FOR:\t{self.atributos['forca']}\n"
-                f"DES:\t{self.atributos['destreza']}\n"
-                f"CON:\t{self.atributos['constituicao']}\n"
-                f"INT:\t{self.atributos['inteligencia']}\n"
-                f"SAB:\t{self.atributos['sabedoria']}\n"
-                f"CAR:\t{self.atributos['carisma']}"
-            )
+        base = (
+            f"\t\t--> Atributos <--\t\t\n"
+            f"FOR:\t{self.atributos['forca']}\n"
+            f"DES:\t{self.atributos['destreza']}\n"
+            f"CON:\t{self.atributos['constituicao']}\n"
+            f"INT:\t{self.atributos['inteligencia']}\n"
+            f"SAB:\t{self.atributos['sabedoria']}\n"
+            f"CAR:\t{self.atributos['carisma']}\n"
+        )
 
+        raciais = self.raca.bonus()
+        raciais_str = "\n".join([f"{k.upper()}:\t{v}" for k, v in raciais.items()])
+
+        return f"{base}\n\t\t--> Atributos Raciais <--\t\t\n{raciais_str}"
+
+    
 # Como a decisão de estilos aparentemente afeta somente a criação de personagens, então decidi colocar os métodos relacionados a isso aqui mesmo. 
     def determinar_atributos(self, estilo):
         if estilo == "1":
@@ -37,7 +47,7 @@ class Personagem:
                 dado = 0
                 for _ in range(3):
                     dado += random.randint(1, 6)
-                self.atributos.append(dado)
+                self.atributos[atributo] = dado
 
         elif estilo == "2":
             print(f"Os atributos são\n"
@@ -85,7 +95,7 @@ class Personagem:
                     numeros.append(num)
 
                 valor = min(numeros)
-                min.remove(valor)
+                numeros.remove(valor)
 
                 for numero in numeros:
                     dado += numero
