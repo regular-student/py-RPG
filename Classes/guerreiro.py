@@ -1,4 +1,4 @@
-from classe import ClasseBase
+from .classe import ClasseBase
 
 class Guerreiro(ClasseBase):
     def __init__(self):

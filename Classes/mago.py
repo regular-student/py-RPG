@@ -1,4 +1,4 @@
-from classe import ClasseBase
+from .classe import ClasseBase
 
 class Mago(ClasseBase):
     def __init__(self):
@@ -10,5 +10,5 @@ class Mago(ClasseBase):
         self.habilidades = {
             "Magias arcanas": 1,
             "Ler magias": 1,
-            "Detectar magias": 6
+            "Detectar magias": 1
         }

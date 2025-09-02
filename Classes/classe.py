@@ -9,12 +9,12 @@ class ClasseBase(ABC):
         self.armaduras_permitidas = []
         self.habilidades = {}
 
-     def exibir_habilidades(self):
+    def exibir_habilidades(self):
         print(f"\t\t--> Habilidades <--\t\t\n")
         if not self.habilidades:
             print("Nenhuma habilidade definida.")
         else:
             for habilidade, descricao in self.habilidades.items():
-                print(f"- {habilidade}: {descricao}")
+                print(f"{habilidade}: {descricao}")
         print("\n" * 2)
     
