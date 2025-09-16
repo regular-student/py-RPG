@@ -1,54 +1,73 @@
-from personagem import Personagem
-from raca import Humano, Elfo, Halfling
-from Classes.guerreiro import Guerreiro
-from Classes.mago import Mago
-from Classes.clerigo import Clerigo
+# main.py
 
-classe = None
-while classe is None:
-    print("Escolha sua classe: ")
-    print("1\t-\tGuerreiro")
-    print("2\t-\tMago")
-    print("3\t-\tClérigo")
-    escolha_classe = input("-> ")
+from models.personagem import Personagem, Guerreiro, Mago, Clerigo, Humano, Elfo, Halfling
+from services.distribuicao_atributos import determinar_atributos # Importa a nova função
 
-    if escolha_classe == "1":
-        classe = Guerreiro
-    elif escolha_classe == "2":
-        classe = Mago
-    elif escolha_classe == "3":
-        classe = Clerigo
-    else:
-        print("Opção inválida, tente novamente.\n")
+# --- Esta parte é a VIEW (exibição de menus) e o CONTROLLER (captura de input) ---
 
-estilo = None
-while estilo is None:
-    print("\nEscolha o estilo: ")
-    print("1\t-\tClássico")
-    print("2\t-\tAventureiro")
-    print("3\t-\tHeróico")
-    estilo = input("-> ")
+# Função para escolher a classe
+def escolher_classe():
+    while True:
+        print("Escolha sua classe: ")
+        print("1\t-\tGuerreiro")
+        print("2\t-\tMago")
+        print("3\t-\tClérigo")
+        escolha = input("-> ")
+        if escolha == "1":
+            return Guerreiro
+        elif escolha == "2":
+            return Mago
+        elif escolha == "3":
+            return Clerigo
+        else:
+            print("Opção inválida, tente novamente.\n")
 
-raca = None
-while raca is None:
-    print("\nEscolha a raça: ")
-    print("1\t-\tHumano")
-    print("2\t-\tElfo")
-    print("3\t-\tHalfling")
-    escolha_raca = input("-> ")
+# Função para escolher a raça
+def escolher_raca():
+    while True:
+        print("\nEscolha a raça: ")
+        print("1\t-\tHumano")
+        print("2\t-\tElfo")
+        print("3\t-\tHalfling")
+        escolha = input("-> ")
+        if escolha == "1":
+            return Humano
+        elif escolha == "2":
+            return Elfo
+        elif escolha == "3":
+            return Halfling
+        else:
+            print("Opção inválida, tente novamente.\n")
 
-    if escolha_raca == "1":
-        raca = Humano
-    elif escolha_raca == "2":
-        raca = Elfo
-    elif escolha_raca == "3":
-        raca = Halfling
-    else:
-        print("Opção inválida, tente novamente.\n")
+# Função para escolher o estilo de atributos
+def escolher_estilo_atributos():
+    while True:
+        print("\nEscolha o estilo de geração de atributos: ")
+        print("1\t-\tClássico (3d6)")
+        print("2\t-\tAventureiro (escolha onde alocar)")
+        print("3\t-\tHeróico (4d6, descarta o menor)")
+        escolha = input("-> ")
+        if escolha in ["1", "2", "3"]:
+            return escolha
+        else:
+            print("Opção inválida, tente novamente.\n")
 
+# --- Lógica principal do Controller ---
+def main():
+    classe_escolhida = escolher_classe()
+    raca_escolhida = escolher_raca()
+    estilo_escolhido = escolher_estilo_atributos()
 
-personagem1 = Personagem(raca, classe, estilo)
+    # Controller chama o serviço para obter os atributos
+    atributos_base = determinar_atributos(estilo_escolhido)
 
-print("\n•\t•\t•\t Personagem Criado\t•\t•\t•\t")
-print(personagem1)
-personagem1.classe.exibir_habilidades()
+    # Controller cria o Model (Personagem) com os dados coletados
+    personagem_criado = Personagem(raca_escolhida, classe_escolhida, atributos_base)
+
+    # Controller interage com a View para exibir o resultado
+    print("\n•\t•\t•\t Personagem Criado\t•\t•\t•\t")
+    print(personagem_criado)
+    personagem_criado.classe.exibir_habilidades()
+
+if __name__ == "__main__":
+    main()

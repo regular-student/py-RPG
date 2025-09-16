@@ -12,7 +12,7 @@ class Alinhamento(Enum):
     ORDER = "Ordem"
 
 class RacaBase(ABC):
-    def __init__(self, nome: str, mobilidade, int, alinhamento: Alinhamento, visao: Visao):
+    def __init__(self, nome: str, mobilidade: int, alinhamento: Alinhamento, visao: Visao):
         self.nome = nome
         self.mobilidade = mobilidade
         self.alinhamento = alinhamento
