@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Personagem Criado - pyRPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Personagem Criado!</h1>
+        <div class="card">
+            <p>{{ personagem }}</p>
+        </div>
+        <a href="{{ url_for('criar_personagem') }}" class="button-link">Criar outro personagem</a>
+    </div>
+</body>
+</html>

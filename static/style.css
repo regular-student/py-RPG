@@ -1,0 +1,101 @@
+/* static/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: #F0F8FF;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 2em 3em;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #007BFF;
+    margin-bottom: 1.5em;
+    font-weight: 700;
+}
+
+form > div {
+    margin-bottom: 1.5em;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.7em;
+    color: #555;
+    font-weight: 400;
+}
+
+select {
+    width: 100%;
+    padding: 0.8em;
+    border: 2px solid #D6EAF8; /* Borda azul clara */
+    border-radius: 10px;
+    background-color: #FDFEFE;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+select:focus {
+    outline: none;
+    border-color: #73C7F5; /* Azul mais forte ao focar */
+}
+
+button, .button-link {
+    background: linear-gradient(45deg, #89CFF0, #007BFF); /* Gradiente azul fofo */
+    color: white;
+    border: none;
+    padding: 1em 1.5em;
+    border-radius: 12px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1em;
+}
+
+button:hover, .button-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+.card {
+    background-color: #FDFEFE;
+    border: 2px solid #EBF5FB;
+    padding: 1.5em;
+    margin-top: 1em;
+    border-radius: 15px;
+    text-align: left;
+    white-space: pre-wrap;
+    line-height: 1.6;
+
+    font-family: 'IBM Plex Mono', monospace; 
+}
+
+.erro {
+    color: #E74C3C;
+    background-color: #FADBD8;
+    padding: 0.8em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+}

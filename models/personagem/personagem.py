@@ -5,7 +5,7 @@ class Personagem:
         self.atributos = atributos
         self.atributos["XP"] = 0 # XP inicial
 
-        # Aplica bônus raciais
+        # bônus raciais
         bonus_raciais = self.raca.bonus() if hasattr(self.raca, 'bonus') else {}
         for atributo, bonus in bonus_raciais.items():
             if atributo in self.atributos:

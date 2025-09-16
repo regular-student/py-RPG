@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Personagem - pyRPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crie seu Personagem</h1>
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+        <form action="/criar" method="post">
+            <div>
+                <label for="classe">Escolha sua Classe:</label>
+                <select name="classe" id="classe" required>
+                    <option value="1">Guerreiro</option>
+                    <option value="2">Mago</option>
+                    <option value="3">Clérigo</option>
+                </select>
+            </div>
+            <div>
+                <label for="raca">Escolha sua Raça:</label>
+                <select name="raca" id="raca" required>
+                    <option value="1">Humano</option>
+                    <option value="2">Elfo</option>
+                    <option value="3">Halfling</option>
+                </select>
+            </div>
+            <div>
+                <label for="estilo">Estilo de Geração de Atributos:</label>
+                <select name="estilo" id="estilo" required>
+                    <option value="1">Clássico (3d6)</option>
+                    <option value="2">Aventureiro (escolha onde alocar)</option>
+                    <option value="3">Heróico (4d6, descarta o menor)</option>
+                </select>
+            </div>
+            <button type="submit">Criar Personagem</button>
+        </form>
+    </div>
+</body>
+</html>
