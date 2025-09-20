@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Distribuir Atributos - pyRPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Distribua seus Atributos ({{ titulo }})</h1>
+        <p>Valores rolados: <strong>{{ valores|sort|join(', ') }}</strong></p>
+
+        {% if erro %}
+            <p class="erro">{{ erro }}</p>
+        {% endif %}
+
+        <form action="{{ url_for('distribuir_atributos') }}" method="post" id="form-atributos">
+            {% set nomes_atributos = ["forca", "destreza", "constituicao", "inteligencia", "sabedoria", "carisma"] %}
+
+            {% for nome in nomes_atributos %}
+            <div>
+                <label for="{{ nome }}">{{ nome.capitalize() }}:</label>
+                <select name="{{ nome }}" class="atributo-select" required>
+                    <option value="" disabled selected>Escolha um valor</option>
+                    {% for valor in valores %}
+                    <option value="{{ valor }}">{{ valor }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+
+            <button type="submit">Finalizar Personagem</button>
+        </form>
+    </div>
+
+    <script>
+        const selects = document.querySelectorAll('.atributo-select');
+        const form = document.getElementById('form-atributos');
+
+        form.addEventListener('change', () => {
+            const selectedValues = Array.from(selects)
+                                        .map(s => s.value)
+                                        .filter(v => v !== "");
+
+            selects.forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    if (option.value !== "" && option.value !== select.value) {
+                        option.disabled = selectedValues.includes(option.value);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
