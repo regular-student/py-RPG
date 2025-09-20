@@ -67,7 +67,7 @@ def criar_personagem():
                 "criar_personagem.html", erro="Opção de classe ou raça inválida!"
             )
             
-        return render_template("criar_personagem.html")
+    return render_template("criar_personagem.html")
 
 @app.route("/distribuir-atributos", methods=["GET", "POST"])
 def distribuir_atributos():

@@ -34,18 +34,46 @@
     </div>
 
     <script>
-        const selects = document.querySelectorAll('.atributo-select');
         const form = document.getElementById('form-atributos');
+        const selects = document.querySelectorAll('.atributo-select');
+        
+        // Passa os valores rolados do Jinja2 para o JavaScript
+        const valoresRolados = {{ valores|tojson }};
+
+        // Cria um mapa de contagem para os valores rolados originais
+        const contagemOriginal = valoresRolados.reduce((acc, val) => {
+            acc[val] = (acc[val] || 0) + 1;
+            return acc;
+        }, {});
 
         form.addEventListener('change', () => {
-            const selectedValues = Array.from(selects)
-                                        .map(s => s.value)
-                                        .filter(v => v !== "");
+            // Pega todos os valores atualmente selecionados
+            const valoresSelecionados = Array.from(selects)
+                                             .map(s => s.value)
+                                             .filter(v => v !== "");
 
+            // Cria um mapa de contagem para os valores selecionados
+            const contagemSelecionados = valoresSelecionados.reduce((acc, val) => {
+                acc[val] = (acc[val] || 0) + 1;
+                return acc;
+            }, {});
+
+            // Itera sobre cada menu <select> para atualizar as opções
             selects.forEach(select => {
+                const selecaoAtual = select.value;
+
                 Array.from(select.options).forEach(option => {
-                    if (option.value !== "" && option.value !== select.value) {
-                        option.disabled = selectedValues.includes(option.value);
+                    if (option.value === "") return; // Pula a opção "Escolha um valor"
+
+                    const valorOpcao = option.value;
+                    const selecionadoMuitasVezes = (contagemSelecionados[valorOpcao] || 0) >= (contagemOriginal[valorOpcao] || 0);
+
+                    // Desabilita a opção se ela já foi selecionada o número máximo de vezes,
+                    // a menos que seja a seleção atual deste próprio menu.
+                    if (selecionadoMuitasVezes && valorOpcao !== selecaoAtual) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
                     }
                 });
             });
